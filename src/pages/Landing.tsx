@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { LandingSearch } from 'components';
 
 function Landing() {
   return (
@@ -18,6 +19,9 @@ function Landing() {
           <p className="font-poppins font-normal text-white text-2xl">
             Select your aviability date, event type and see details of it.
           </p>
+        </div>
+        <div className="search-container">
+          <LandingSearch />
         </div>
       </div>
     </div>

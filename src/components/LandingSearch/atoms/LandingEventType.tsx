@@ -22,12 +22,12 @@ const dummyData = [
 
 function LandingEventType() {
   return (
-    <div className="event-select-wrapper flex w-[275px] gap-1 items-center ">
-      <IoAmericanFootballOutline className="event-icon m-0 text-4xl text-white" />
+    <div className="event-select-wrapper flex flex-1 gap-1 items-center">
+      <IoAmericanFootballOutline className="event-icon flex-shrink-0 m-0 md:text-4xl text-2xl text-white" />
       <div className="input-content-container flex-1 flex-col pl-2">
         <label
           htmlFor="landing-event-type-select"
-          className="font-poppins font-medium text-white"
+          className="font-poppins font-medium md:text-base text-sm text-white"
         >
           Event Type
         </label>
@@ -35,7 +35,7 @@ function LandingEventType() {
           <Select
             id="landing-event-type-select"
             data={dummyData}
-            containerClassName=" px-0 pr-3 py-0 bg-transparent text-white"
+            containerClassName=" px-0 pr-3 py-0 bg-transparent md:text-base text-sm text-white"
           />
         </div>
       </div>

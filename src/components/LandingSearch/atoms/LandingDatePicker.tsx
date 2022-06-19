@@ -10,21 +10,20 @@ function LandingDatePicker() {
   ]);
 
   return (
-    <div className="date-search-wrapper flex w-[275px] gap-1 items-center">
-      <IoCalendarNumberOutline className="date-icon flex-shrink-0 m-0 text-4xl text-white" />
+    <div className="date-search-wrapper flex flex-1 gap-1 items-center">
+      <IoCalendarNumberOutline className="date-icon flex-shrink-0 m-0 md:text-4xl text-2xl text-white" />
       <div className="input-content-container flex flex-col pl-2">
         <label
           htmlFor="landing-date-input"
-          className="font-poppins font-medium text-white"
+          className="font-poppins font-medium md:text-base text-sm text-white"
         >
           Date
         </label>
         <DatePicker
-          containerClassName="w-60"
-          inputClass="cursor-pointer w-full outline-none bg-transparent text-white placeholder:text-[#dedede]"
+          inputClass="cursor-pointer w-full outline-none bg-transparent md:text-base text-sm text-white placeholder:text-[#dedede]"
           format="DD/MM/YYYY"
           range
-          placeholder="Select starting & ending date"
+          placeholder="Select dates"
         />
       </div>
     </div>

@@ -7,7 +7,7 @@ import SelectOptions, { OptionProp } from './atoms/SelectOptions';
 const DROPDOWN_OFFSET = 5;
 
 interface SelectProps {
-  id: React.HTMLAttributes<HTMLDivElement>['id'];
+  id?: React.HTMLAttributes<HTMLDivElement>['id'];
   data: OptionProp[];
   placeholder?: string;
   offset?: number;
@@ -42,6 +42,7 @@ function Select(props: SelectProps) {
   const handleSelect = (value: OptionProp) => {
     setVisible(false);
     setSelected(value);
+    console.log(value);
   };
 
   return (

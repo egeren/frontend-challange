@@ -35,7 +35,9 @@ function LandingEventType() {
           <Select
             id="landing-event-type-select"
             data={dummyData}
-            containerClassName=" px-0 pr-3 py-0 bg-transparent md:text-base text-sm text-white"
+            containerClassName="pl-0 pr-3 py-0 bg-transparent md:text-base text-sm text-white border-none"
+            inputClassName="text-white"
+            iconClassName="text-white"
           />
         </div>
       </div>

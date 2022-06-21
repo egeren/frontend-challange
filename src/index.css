@@ -17,7 +17,7 @@ code {
     monospace;
 }
 
-h1 {
+.landing-page-header {
   background: linear-gradient(90deg, #d6025c 3.25%, #02d6fb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

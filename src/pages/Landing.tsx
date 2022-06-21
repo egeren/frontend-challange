@@ -10,7 +10,7 @@ function Landing() {
       />
       <div className="landing-container flex flex-col w-full sm:px-20 px-5 pb-10">
         <div className="texts-container flex flex-col lg:items-start items-center">
-          <h1 className="w-fit uppercase font-bebas 2xl:text-9xl xl:text-8xl lg:text-7xl md:text-6xl sm:text-6xl xs:text-5xl text-4xl tracking-widest">
+          <h1 className="landing-page-header w-fit uppercase font-bebas 2xl:text-9xl xl:text-8xl lg:text-7xl md:text-6xl sm:text-6xl xs:text-5xl text-4xl tracking-widest">
             SEARCH FOR EVENTS
           </h1>
           <p className="font-poppins font-normal text-white 2xl:text-3xl xl:text-xl sm:text-lg xs:text-sm text-xs text-center pt-3">

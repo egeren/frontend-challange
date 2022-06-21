@@ -13,6 +13,9 @@ interface SelectProps {
   offset?: number;
   containerClassName?: React.HTMLAttributes<HTMLDivElement>['className'];
   optionsContainerClassName?: React.HTMLAttributes<HTMLDivElement>['className'];
+  inputClassName?: React.HTMLAttributes<HTMLDivElement>['className'];
+  iconClassName?: React.HTMLAttributes<HTMLDivElement>['className'];
+  icon?: IconType;
 }
 
 function Select(props: SelectProps) {
@@ -20,8 +23,11 @@ function Select(props: SelectProps) {
     data,
     offset = DROPDOWN_OFFSET,
     containerClassName,
+    inputClassName,
     optionsContainerClassName,
+    iconClassName,
     placeholder,
+    icon,
   } = props;
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState<OptionProp>();
@@ -46,18 +52,23 @@ function Select(props: SelectProps) {
   };
 
   return (
-    <div className="select-wrapper relative font-poppins">
+    <div className="select-wrapper flex relative font-poppins select-none">
       <div
         ref={container}
         onClick={handleVisibility}
-        className={`select-container cursor-pointer w-full flex flex-row justify-between items-center gap-4 bg-white px-2 py-2 rounded-md ${containerClassName}`}
+        className={`select-container cursor-pointer w-full flex justify-between flex-row items-center border bg-white text-black border-[#aaa] px-2 py-3  rounded-md ${containerClassName}`}
       >
-        <p>{selected?.value || placeholder || 'Select item'}</p>
-        <IoChevronDown />
+        <div className={`flex items-center ${inputClassName}`}>
+          {icon && React.createElement(icon, { className: 'text-xl mr-2' })}
+          <p>{selected?.value || placeholder || 'Select item'}</p>
+        </div>
+        <div className={`chevron-icon-container pr-2 ${iconClassName}`}>
+          <IoChevronDown className="justify-self-end" />
+        </div>
       </div>
       <div
         ref={optionsContainer}
-        className={`options-container w-full absolute bg-white rounded-sm overflow-hidden ${optionsContainerClassName}`}
+        className={`options-container w-full absolute z-10 bg-white text-black rounded-md overflow-hidden shadow-lg ${optionsContainerClassName}`}
       >
         <SelectOptions onSelect={handleSelect} visible={visible} data={data} />
       </div>

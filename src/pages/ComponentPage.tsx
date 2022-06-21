@@ -1,6 +1,13 @@
-import { Button, Select } from 'components';
+import { Button, Select, DateInput, InputContainer } from 'components';
+import TextInput from 'components/TextInput';
 import React, { useState, useEffect } from 'react';
-import { IoAdd, IoPerson, IoWifi } from 'react-icons/io5';
+import {
+  IoAdd,
+  IoAmericanFootball,
+  IoCalendarNumber,
+  IoPerson,
+  IoWifi,
+} from 'react-icons/io5';
 
 const dummyData = [
   {
@@ -23,9 +30,21 @@ const dummyData = [
 function ComponentPage() {
   return (
     <div className="w-screen h-screen px-10 py-10 bg-gray-500">
-      <div className="w-80">
+      <div className="w-80 flex flex-col text-white">
+        Select
         <Select data={dummyData} />
-        <Button text="Merhaba Dünya" className="px-20 mt-4" />
+        Select \w Icon
+        <Select data={dummyData} icon={IoAmericanFootball} />
+        Date Input
+        <DateInput />
+        Date Input \w Icon
+        <DateInput icon={IoCalendarNumber} />
+        Text Input
+        <TextInput />
+        Text Input \w Icon
+        <TextInput icon={IoPerson} />
+        Button
+        <Button text="Merhaba Dünya" />
       </div>
     </div>
   );

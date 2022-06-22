@@ -9,6 +9,9 @@ const { actions, reducer } = createSlice({
   reducers: {
     toggleFilters(state, action: PayloadAction<boolean>) {
       state.filtersToggled = action.payload;
+      if (window.innerWidth > 1023) {
+        state.filtersToggled = true;
+      }
       return state;
     },
   },

@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Button, DateInput, Select, TextInput } from 'components';
 import {
   IoAmericanFootballOutline,
+  IoBook,
   IoBusinessOutline,
   IoCalendarNumberOutline,
+  IoFootballOutline,
   IoLocationOutline,
+  IoMic,
   IoPerson,
   IoSearch,
 } from 'react-icons/io5';
@@ -22,18 +25,18 @@ function EventFilters() {
   const dummyData = [
     {
       id: '1',
-      value: 'Option 1',
-      icon: IoPerson,
+      value: 'Sports',
+      icon: IoFootballOutline,
+    },
+    {
+      id: '1',
+      value: 'Theater',
+      icon: IoBook,
     },
     {
       id: '1',
       value: 'Concert',
-      icon: IoPerson,
-    },
-    {
-      id: '1',
-      value: 'Soccer',
-      icon: IoPerson,
+      icon: IoMic,
     },
   ];
 
@@ -51,6 +54,8 @@ function EventFilters() {
         keywords: keywords,
       })
     );
+    console.log(filtersData);
+    handleClose();
   };
 
   return (
@@ -69,19 +74,36 @@ function EventFilters() {
           <div className="filters-container flex-1 flex flex-col gap-4 pt-5">
             <div className="filter-item">
               <p>Starting Date</p>
-              <DateInput icon={IoCalendarNumberOutline} />
+              <DateInput
+                icon={IoCalendarNumberOutline}
+                onChange={(date) => {
+                  setStartingDate(date);
+                }}
+              />
             </div>
             <div className="filter-item">
               <p>Ending Date</p>
-              <DateInput icon={IoCalendarNumberOutline} />
+              <DateInput
+                icon={IoCalendarNumberOutline}
+                onChange={(date) => {
+                  setEndingDate(date);
+                }}
+              />
             </div>
             <div className="filter-item">
               <p>Event Type</p>
-              <Select icon={IoAmericanFootballOutline} data={dummyData} />
+              <Select
+                icon={IoAmericanFootballOutline}
+                data={dummyData}
+                onSelect={(item) => setEventType(item.value)}
+              />
             </div>
             <div className="filter-item">
               <p>Keywords</p>
-              <TextInput icon={IoSearch} />
+              <TextInput
+                icon={IoSearch}
+                onChange={(value) => setKeywords(value)}
+              />
             </div>
           </div>
           <div className="searct-button-container flex items-center justify-center pt-4">

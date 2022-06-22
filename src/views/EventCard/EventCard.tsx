@@ -31,14 +31,14 @@ function EventCard(props: EventCardProps) {
   return (
     <div
       className="event-card-wrapper bg-center rounded-lg shadow-md h-max cursor-pointer"
-      style={{ backgroundImage: 'url(' + image + ')' }}
+      style={{ backgroundImage: 'url(' + image || url + ')' }}
       onClick={handleClick}
     >
       <div className="event-card-container relative rounded-lg px-3 py-3 z-10 backdrop-blur-xl bg-[#fff] bg-opacity-60 h-full">
         <div className="event-image-container w-full h-[200px]">
           <img
             className="w-full h-full object-cover rounded-lg"
-            src={image}
+            src={image || url}
             alt="Event"
           />
         </div>

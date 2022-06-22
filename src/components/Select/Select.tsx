@@ -15,6 +15,7 @@ interface SelectProps {
   optionsContainerClassName?: React.HTMLAttributes<HTMLDivElement>['className'];
   inputClassName?: React.HTMLAttributes<HTMLDivElement>['className'];
   iconClassName?: React.HTMLAttributes<HTMLDivElement>['className'];
+  direction?: 'top' | 'bottom';
   icon?: IconType;
 }
 
@@ -27,6 +28,7 @@ function Select(props: SelectProps) {
     optionsContainerClassName,
     iconClassName,
     placeholder,
+    direction = 'bottom',
     icon,
   } = props;
   const [visible, setVisible] = useState(false);
@@ -38,8 +40,15 @@ function Select(props: SelectProps) {
     if (!container.current || !optionsContainer.current) return;
     const offsetTop =
       container.current.offsetTop + container.current.clientHeight;
-    optionsContainer.current.style.top = offsetTop + offset + 'px';
-  }, [container]);
+
+    if (direction == 'bottom') {
+      optionsContainer.current.style.top = offsetTop + offset + 'px';
+    } else {
+      optionsContainer.current.style.top =
+        0 - optionsContainer.current.clientHeight - offset + 'px';
+      console.log(optionsContainer.current.clientHeight);
+    }
+  }, [container, visible]);
 
   const handleVisibility = () => {
     setVisible((prev) => !prev);
@@ -52,7 +61,7 @@ function Select(props: SelectProps) {
   };
 
   return (
-    <div className="select-wrapper flex relative font-poppins select-none">
+    <div className="select-wrapper flex w-full relative font-poppins select-none">
       <div
         ref={container}
         onClick={handleVisibility}

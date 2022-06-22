@@ -5,6 +5,7 @@ import Button from './Button';
 import DateInput from './DateInput';
 import InputContainer from './InputContainer';
 import TextInput from './TextInput';
+import Number from './Number';
 
 export {
   LandingSearch,
@@ -14,4 +15,5 @@ export {
   DateInput,
   InputContainer,
   TextInput,
+  Number,
 };

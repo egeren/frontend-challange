@@ -24,3 +24,8 @@ code {
   background-clip: text;
   text-fill-color: transparent;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: white !important;
+}

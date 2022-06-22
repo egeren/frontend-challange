@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import EventDetails from 'views/EventDetails';
+import { EventDetailsProps } from 'views/EventDetails/EventDetails';
 import EventGallery from 'views/EventGallery';
 
-function EventContent() {
+function EventContent(props: EventDetailsProps) {
+  const { data } = props;
+  const {
+    id,
+    image,
+    title,
+    performers,
+    location,
+    date,
+    avgPrice,
+    maxPrice,
+    venue,
+  } = data;
+  if (!props.data.venue) {
+    return <></>;
+  }
   return (
     <div className="event-content-wrapper flex-1 h-full bg-white lg:rounded-md overflow-scroll z-0">
       <div className="event-content-container">
@@ -13,10 +29,8 @@ function EventContent() {
             className="absolute w-full h-full object-cover object-center z-[-1]"
           />
           <div className="event-titles-container px-4 py-4 text-white">
-            <h1 className="font-bebas text-6xl tracking-widest">
-              GAMES OF WINDMILL
-            </h1>
-            <p className="font-poppins text-lg">performing by Jane Smith</p>
+            <h1 className="font-bebas text-6xl tracking-widest">{title}</h1>
+            <p className="font-poppins text-lg">performing by {performers}</p>
           </div>
         </div>
         <div className="event-description-content px-4 py-4">
@@ -40,7 +54,7 @@ function EventContent() {
             </div>
           </div>
           <div className="mobile-details flex pt-4 lg:hidden">
-            <EventDetails isMobile />
+            <EventDetails data={data} isMobile />
           </div>
         </div>
       </div>

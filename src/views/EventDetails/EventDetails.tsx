@@ -1,5 +1,6 @@
 import { Button, Number, Select } from 'components';
 import React, { useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
 import {
   IoBusinessOutline,
   IoCalendarNumberOutline,
@@ -22,13 +23,44 @@ const dummyData = [
   },
 ];
 
-interface EventDetailsProps {
+export interface EventDetailsProps {
   isMobile?: boolean;
+  data: {
+    id: string;
+    image?: string;
+    title: string;
+    performers: string[];
+    location: string;
+    date: string;
+    avgPrice: string;
+    maxPrice: string;
+    venue: {
+      id: string;
+      name: string;
+    };
+  };
 }
 
 function EventDetails(props: EventDetailsProps) {
   const { isMobile } = props;
+  const {
+    id,
+    image,
+    title,
+    performers,
+    location,
+    date,
+    avgPrice,
+    maxPrice,
+    venue,
+  } = props.data;
   const isMobileClass = isMobile ? '' : 'absolute';
+  const jsDate = DateTime.fromISO(date);
+  const parsedDate = `${jsDate.day}/${jsDate.month}/${jsDate.year}`;
+
+  if (!props.data.venue) {
+    return <></>;
+  }
   return (
     <div
       className={
@@ -47,28 +79,28 @@ function EventDetails(props: EventDetailsProps) {
               <p className="font-medium text-base">Event Location</p>
             </div>
             <div className="map-placeholder w-full h-[150px] bg-red-300 rounded-md" />
-            <p className="text-sm">Çiğli, İzmir</p>
+            <p className="text-sm">{location}</p>
           </div>
           <div className="detail-item flex flex-col gap-2">
             <div className="titles flex items-center gap-1">
               <IoCalendarNumberOutline className="text-3xl" />
               <p className="font-medium text-base">Event Time</p>
             </div>
-            <p className="text-sm">12 Temmuz 2022 09:00</p>
+            <p className="text-sm">{parsedDate}</p>
           </div>
           <div className="detail-item flex flex-col gap-2">
             <div className="titles flex items-center gap-1">
               <IoPeopleOutline className="text-3xl" />
               <p className="font-medium text-base">Performer(s)</p>
             </div>
-            <p className="text-sm">Jane Smith</p>
+            <p className="text-sm">{performers}</p>
           </div>
           <div className="detail-item flex flex-col gap-2 pb-4">
             <div className="titles flex items-center gap-1">
               <IoBusinessOutline className="text-3xl" />
               <p className="font-medium text-base">Venue</p>
             </div>
-            <p className="text-sm">Jane Smith</p>
+            <p className="text-sm">{venue.name}</p>
           </div>
         </div>
         <div className="tickets-container flex gap-2">

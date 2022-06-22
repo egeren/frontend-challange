@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { IconType } from 'react-icons';
-import DatePicker from 'react-multi-date-picker';
+import DatePicker, { DateObject } from 'react-multi-date-picker';
 
 interface DateInputProps {
   containerClassName?: string;
   icon?: IconType;
+  onChange?: (date: string) => void;
 }
 
 function DateInput(props: DateInputProps) {
-  const { containerClassName, icon } = props;
+  const { containerClassName, icon, onChange } = props;
+
+  const handleOnChange = (date: DateObject) => {
+    const dateString = `${date.year}-${date.month}-${date.day}`;
+    if (onChange) onChange(dateString);
+  };
   return (
     <div
       className={`select-container cursor-pointer w-full flex flex-row justify-between items-center border bg-white text-black border-[#aaa] rounded-md overflow-hidden ${containerClassName}`}
@@ -20,6 +26,7 @@ function DateInput(props: DateInputProps) {
         format="DD/MM/YYYY"
         editable={false}
         placeholder="Select date"
+        onChange={handleOnChange}
       />
     </div>
   );

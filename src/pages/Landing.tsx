@@ -1,7 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Button, LandingSearch } from 'components';
+import { ISelectedDate } from 'components/LandingSearch/atoms/LandingDatePicker';
+import { useAppDispatch, useAppSelector } from 'hooks/storeHooks';
+import { filtersActions } from 'redux/store';
+import { useNavigate } from 'react-router-dom';
 
 function Landing() {
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedDates, setSelectedDates] = useState<ISelectedDate>();
+  const [selectedEventType, setSelectedEventType] = useState('');
+  const filtersData = useAppSelector((state) => state.filtersData);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    dispatch(
+      filtersActions.setFilters({
+        ...filtersData,
+        location: selectedLocation,
+        startingDate: selectedDates?.dates[0] || '',
+        endingDate: selectedDates?.dates[1] || '',
+        eventType: selectedEventType,
+      })
+    );
+    navigate('/events');
+  };
+
+  console.log(filtersData);
+
   return (
     <div className="landing-wrapper flex items-center relative w-full min-h-screen">
       <img
@@ -21,10 +47,18 @@ function Landing() {
           </p>
         </div>
         <div className="search-container flex lg:justify-start justify-center lg:pt-20 pt-10">
-          <LandingSearch />
+          <LandingSearch
+            locationSelect={(loc) => setSelectedLocation(loc)}
+            dateSelect={(date) => setSelectedDates(date)}
+            eventSelect={(event) => setSelectedEventType(event)}
+          />
         </div>
         <div className="search-button-container flex lg:justify-start justify-center lg:pt-10 pt-8">
-          <Button className="px-14" text="Search Events" />
+          <Button
+            className="px-14"
+            text="Search Events"
+            onClick={handleSearch}
+          />
         </div>
       </div>
     </div>

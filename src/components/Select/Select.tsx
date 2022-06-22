@@ -17,6 +17,7 @@ interface SelectProps {
   iconClassName?: React.HTMLAttributes<HTMLDivElement>['className'];
   direction?: 'top' | 'bottom';
   icon?: IconType;
+  onSelect?: (item: OptionProp) => void;
 }
 
 function Select(props: SelectProps) {
@@ -30,6 +31,7 @@ function Select(props: SelectProps) {
     placeholder,
     direction = 'bottom',
     icon,
+    onSelect,
   } = props;
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState<OptionProp>();
@@ -57,7 +59,7 @@ function Select(props: SelectProps) {
   const handleSelect = (value: OptionProp) => {
     setVisible(false);
     setSelected(value);
-    console.log(value);
+    if (onSelect) onSelect(value);
   };
 
   return (

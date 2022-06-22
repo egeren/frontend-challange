@@ -6,6 +6,7 @@ import DateInput from './DateInput';
 import InputContainer from './InputContainer';
 import TextInput from './TextInput';
 import Number from './Number';
+import LocationInput from './LocationInput';
 
 export {
   LandingSearch,
@@ -16,4 +17,5 @@ export {
   InputContainer,
   TextInput,
   Number,
+  LocationInput,
 };

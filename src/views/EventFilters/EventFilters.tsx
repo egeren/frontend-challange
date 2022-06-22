@@ -8,9 +8,16 @@ import {
   IoPerson,
   IoSearch,
 } from 'react-icons/io5';
+import { useAppDispatch, useAppSelector } from 'hooks/storeHooks';
+import { filtersActions, uiActions } from 'redux/store';
 
 function EventFilters() {
-  const [state, setState] = useState('');
+  const [startingDate, setStartingDate] = useState('');
+  const [endingDate, setEndingDate] = useState('');
+  const [eventType, setEventType] = useState('');
+  const [keywords, setKeywords] = useState('');
+  const filtersData = useAppSelector((state) => state.filtersData);
+  const dispatch = useAppDispatch();
 
   const dummyData = [
     {
@@ -30,9 +37,28 @@ function EventFilters() {
     },
   ];
 
+  const handleClose = () => {
+    dispatch(uiActions.toggleFilters(false));
+  };
+
+  const handleSearchEvents = () => {
+    dispatch(
+      filtersActions.setFilters({
+        ...filtersData,
+        startingDate: startingDate || '',
+        endingDate: endingDate || '',
+        eventType: eventType,
+        keywords: keywords,
+      })
+    );
+  };
+
   return (
     <>
-      <div className="backdrop fixed lg:hidden block left-0 top-0 w-full h-full bg-black bg-opacity-80 z-30"></div>
+      <div
+        className="backdrop fixed lg:hidden block left-0 top-0 w-full h-full bg-black bg-opacity-80 z-30"
+        onClick={handleClose}
+      ></div>
       <div className="event-filters-wrapper lg:relative absolute lg:flex bg-white xl:w-[350px] lg:w-[300px] w-[350px] h-full rounded-md z-30">
         <div className="event-filters-container w-full h-full flex flex-col px-4 py-4 overflow-y-scroll">
           <div className="event-filters-header">
@@ -42,20 +68,12 @@ function EventFilters() {
           </div>
           <div className="filters-container flex-1 flex flex-col gap-4 pt-5">
             <div className="filter-item">
-              <p>Location</p>
-              <TextInput icon={IoLocationOutline} />
-            </div>
-            <div className="filter-item">
               <p>Starting Date</p>
               <DateInput icon={IoCalendarNumberOutline} />
             </div>
             <div className="filter-item">
               <p>Ending Date</p>
               <DateInput icon={IoCalendarNumberOutline} />
-            </div>
-            <div className="filter-item">
-              <p>Venue</p>
-              <Select icon={IoBusinessOutline} data={dummyData} />
             </div>
             <div className="filter-item">
               <p>Event Type</p>
@@ -67,7 +85,11 @@ function EventFilters() {
             </div>
           </div>
           <div className="searct-button-container flex items-center justify-center pt-4">
-            <Button text="Search Events" className="px-12" />
+            <Button
+              text="Search Events"
+              className="px-12"
+              onClick={handleSearchEvents}
+            />
           </div>
         </div>
       </div>
